@@ -1,6 +1,12 @@
-export default function handler(req, res) {
+module.exports = async (req, res) => {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
+
+    if (!clientId || !redirectUri) {
+        return res.status(500).json({
+            error: "Missing Spotify environment variables"
+        });
+    }
 
     const scope = "user-read-currently-playing";
 
@@ -13,5 +19,5 @@ export default function handler(req, res) {
             scope: scope
         }).toString();
 
-    res.redirect(spotifyUrl);
-}
+    return res.redirect(spotifyUrl);
+};
