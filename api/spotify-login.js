@@ -1,5 +1,6 @@
-export default function handler(request, response) {
-    response.status(200).json({
-        status: "working"
+export function GET() {
+    return Response.json({
+        status: "working",
+        message: "Vercel function is running"
     });
 }
