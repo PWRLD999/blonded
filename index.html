@@ -456,16 +456,24 @@ addEventListener('resize',size);
 })();
 </script>
 
-  <script>
+<script>
 async function updateSpotify() {
-
     try {
-
         const response = await fetch(
-            "https://blonded-one.vercel.app/api/now-playing"
+            "https://blonded-one.vercel.app/api/now-playing",
+            {
+                method: "GET",
+                cache: "no-store"
+            }
         );
 
+        if (!response.ok) {
+            throw new Error("API returned " + response.status);
+        }
+
         const data = await response.json();
+
+        console.log("Spotify data:", data);
 
         const song = document.getElementById("spotify-song");
         const artist = document.getElementById("spotify-artist");
@@ -474,13 +482,11 @@ async function updateSpotify() {
         const link = document.getElementById("spotify-link");
 
         if (!data.is_playing) {
-
             song.textContent = "Not currently playing";
             artist.textContent = "Spotify";
             art.style.display = "none";
-            progress.style.width = "0%";
             link.style.display = "none";
-
+            progress.style.width = "0%";
             return;
         }
 
@@ -489,7 +495,10 @@ async function updateSpotify() {
 
         song.textContent = data.song;
         artist.textContent = data.artist;
+
         art.src = data.album_art;
+        art.alt = data.album + " artwork";
+
         link.href = data.spotify_url;
 
         const percentage =
@@ -498,7 +507,6 @@ async function updateSpotify() {
         progress.style.width = percentage + "%";
 
     } catch (error) {
-
         console.error("Spotify error:", error);
 
         document.getElementById("spotify-song").textContent =
@@ -511,7 +519,6 @@ async function updateSpotify() {
 
 updateSpotify();
 
-// Update every 10 seconds
 setInterval(updateSpotify, 10000);
 </script>
 </body>
