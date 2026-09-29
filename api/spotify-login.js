@@ -1,4 +1,4 @@
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
@@ -20,4 +20,4 @@ module.exports = async (req, res) => {
         }).toString();
 
     return res.redirect(spotifyUrl);
-};
+}
