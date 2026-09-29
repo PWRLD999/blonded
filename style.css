@@ -333,21 +333,20 @@ section {
     justify-content: flex-end;
     margin-top: 18px;
 }
-
 #spotify-link {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 42px;
-    height: 42px;
+    width: 56px;
+    height: 56px;
 
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.22);
 
     color: #eee8dc;
     text-decoration: none;
 
-    font-size: 18px;
+    font-size: 20px;
 
     transition: 0.25s ease;
 }
