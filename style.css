@@ -237,70 +237,126 @@ section {
 /* RADIO PLAYER */
 
 .player {
-    border: 1px solid var(--line);
-
-    background: rgba(12,11,9,.65);
-
-    backdrop-filter: blur(15px);
-
-    padding: 30px;
-
-    max-width: 600px;
-
-    margin-bottom: 100px;
+    margin-top: 35px;
+    padding: 42px 45px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(10, 9, 8, 0.55);
+    backdrop-filter: blur(8px);
 }
+
+/* Top radio bar */
 
 .player-top {
     display: flex;
-
     justify-content: space-between;
-
-    margin-bottom: 25px;
+    align-items: center;
+    margin-bottom: 38px;
 }
 
 .player-label {
     font-family: "DM Mono", monospace;
-
-    font-size: .65rem;
-
-    color: var(--muted);
-
-    letter-spacing: 2px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(235,230,220,0.55);
+    text-transform: uppercase;
 }
 
+/* Main player */
+
+.album {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+/* Album artwork */
+
 .album-art {
-    width: 90px;
-    height: 90px;
-    overflow: hidden;
+    width: 170px;
+    height: 170px;
     flex-shrink: 0;
+    overflow: hidden;
+    background: #111;
 }
 
 .album-art img {
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: cover;
 }
 
+/* Song information */
+
+.song {
+    min-width: 0;
+}
+
 .song h3 {
-    margin-bottom: 8px;
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #eee8dc;
 }
 
 .song p {
     margin: 0;
+    font-family: "DM Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: rgba(235,230,220,0.55);
+}
+
+/* Progress */
+
+.progress {
+    width: 100%;
+    height: 2px;
+    margin-top: 42px;
+    background: rgba(255,255,255,0.12);
+    overflow: hidden;
 }
 
 #spotify-progress {
     display: block;
-    width: 0%;
     height: 100%;
+    width: 0%;
+    background: #eee8dc;
     transition: width 1s linear;
 }
 
-#spotify-link {
-    text-decoration: none;
-    font-size: 24px;
+/* Controls */
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
 }
 
+#spotify-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    color: #eee8dc;
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition: 0.25s ease;
+}
+
+#spotify-link:hover {
+    background: #eee8dc;
+    color: #111;
+    transform: translateY(-2px);
+}
 /* TRANSMISSIONS */
 
 .transmission {
