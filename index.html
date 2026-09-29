@@ -455,5 +455,64 @@ else{let last=0;(function loop(ts){if(ts-last>42){last=ts;step(ts);draw();}reque
 addEventListener('resize',size);
 })();
 </script>
+
+  <script>
+async function updateSpotify() {
+
+    try {
+
+        const response = await fetch(
+            "https://blonded-one.vercel.app/api/now-playing"
+        );
+
+        const data = await response.json();
+
+        const song = document.getElementById("spotify-song");
+        const artist = document.getElementById("spotify-artist");
+        const art = document.getElementById("spotify-art");
+        const progress = document.getElementById("spotify-progress");
+        const link = document.getElementById("spotify-link");
+
+        if (!data.is_playing) {
+
+            song.textContent = "Not currently playing";
+            artist.textContent = "Spotify";
+            art.style.display = "none";
+            progress.style.width = "0%";
+            link.style.display = "none";
+
+            return;
+        }
+
+        art.style.display = "block";
+        link.style.display = "block";
+
+        song.textContent = data.song;
+        artist.textContent = data.artist;
+        art.src = data.album_art;
+        link.href = data.spotify_url;
+
+        const percentage =
+            (data.progress_ms / data.duration_ms) * 100;
+
+        progress.style.width = percentage + "%";
+
+    } catch (error) {
+
+        console.error("Spotify error:", error);
+
+        document.getElementById("spotify-song").textContent =
+            "Spotify unavailable";
+
+        document.getElementById("spotify-artist").textContent =
+            "Try again later";
+    }
+}
+
+updateSpotify();
+
+// Update every 10 seconds
+setInterval(updateSpotify, 10000);
+</script>
 </body>
 </html>
