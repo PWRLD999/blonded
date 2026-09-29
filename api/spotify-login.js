@@ -1,14 +1,14 @@
 export default function handler(req, res) {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
-    if (!clientId || !redirectUri) {
+    const redirectUri =
+        "https://blonded-one.vercel.app/api/spotify-callback";
+
+    if (!clientId) {
         return res.status(500).json({
-            error: "Missing Spotify environment variables"
+            error: "Missing SPOTIFY_CLIENT_ID"
         });
     }
-
-    const scope = "user-read-currently-playing";
 
     const spotifyUrl =
         "https://accounts.spotify.com/authorize?" +
@@ -16,7 +16,7 @@ export default function handler(req, res) {
             client_id: clientId,
             response_type: "code",
             redirect_uri: redirectUri,
-            scope: scope
+            scope: "user-read-currently-playing"
         }).toString();
 
     res.redirect(spotifyUrl);
